@@ -1,10 +1,9 @@
 
 /**
  * @author winter
- * @date 2019/5/17 15:53
+ * @date 2019/5/17 22:44
  */
 public class Array<E> {
-
     private E[] data;
     //定义数组的长度
     private int length;
@@ -40,13 +39,13 @@ public class Array<E> {
     //在数组指定索引index下标插入一个元素e
     public void add(int index, E e){
 
-        //数组空间满了
-        if (size == data.length)
-            throw new IllegalArgumentException("Add failed. Array is full.");
-
         //插入位置不合法
         if (index < 0 || index > size)
             throw new IndexOutOfBoundsException("Add failed. Require index >= 0 and index <= size.");
+
+        //数组空间满了
+        if (size == data.length)
+            resize(2*data.length);
 
         //可以插入
         for (int i = size ; i >= index ; i --) {
@@ -59,9 +58,19 @@ public class Array<E> {
     //插入一个元素
     public boolean add(E e) {
         if (size + 1 == data.length)
-            throw new IllegalArgumentException("Add failed. Array is full.");
+            resize(2*data.length);
         data[size++] = e;
         return true;
+    }
+
+    // 将数组空间扩大两倍
+    private void resize(int newCapaciity) {
+
+        E[] newData = (E[]) new Object[newCapaciity];
+        for (int i = 0; i < size; i++) {
+            newData[i] = data[i];
+        }
+        data = newData;
     }
 
     // 获取index索引位置的元素
@@ -111,6 +120,9 @@ public class Array<E> {
         }
         // GC
         data[--size] = null;
+        //如果数组存储的元素比数组长度的小鱼等于数组容量的一半，进行缩容
+        if (size == data.length / 2)
+            resize(data.length / 2);
         return oldValue;
     }
 
@@ -119,6 +131,8 @@ public class Array<E> {
         int index = find(e);
         if(index != -1) {
             remove(index);
+            if (size == data.length / 2)
+                resize(data.length / 2);
             return true;
         }
         return false;
