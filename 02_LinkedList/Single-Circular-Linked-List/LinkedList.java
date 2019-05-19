@@ -36,12 +36,16 @@ public class LinkedList<E> {
         size = 0;
     }
 
+    //获取链表长度
+    public int size(){
+        return size;
+    }
     //判断链表是否为空
     public boolean isEmpty(){
         return size == 0;
     }
 
-    //在链表头添加元素
+    //在链表头添加结点
     public void addFirst(E e){
         if (size == 0){
             Node node = new Node(e);
@@ -56,7 +60,7 @@ public class LinkedList<E> {
         }
     }
 
-    // 在指定元素中添加链表节点
+    // 在指定下标中添加链表节点
     public void add(int index, E e){
         if(index < 0 || index > size)
             throw new IndexOutOfBoundsException("Add failed. Illegal index.");
@@ -120,7 +124,9 @@ public class LinkedList<E> {
     //查找链表中是否包含指定元素
     public boolean contains(E e){
         Node cur = head;
-        while (cur != null){
+        if (tail.e.equals(e))
+            return true;
+        while (cur != tail){
             if (cur.e.equals(e))
                 return true;
             cur = cur.next;
