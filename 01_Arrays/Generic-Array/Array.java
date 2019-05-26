@@ -49,7 +49,7 @@ public class Array<E> {
             throw new IndexOutOfBoundsException("Add failed. Require index >= 0 and index <= size.");
 
         //可以插入
-        for (int i = size ; i >= index ; i --) {
+        for (int i = size ; i > index ; i --) {
             data[i] = data[i-1];
         }
         data[index] = e;
