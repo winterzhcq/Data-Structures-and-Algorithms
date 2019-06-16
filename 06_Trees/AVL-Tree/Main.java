@@ -1,15 +1,13 @@
 
 
-import cn.winter.datastructures.tree.bst.BST;
-
-import java.util.Random;
-
-/**
+/**²âÊÔÆ½ºâ¶ş²æÊ÷
  * @author winter
  * @date 2019/6/15 19:44
  */
 public class Main {
+
     public static void main(String[] args) {
+
         AVLTree<Integer,Integer> avlTree = new AVLTree<>();
         avlTree.add(10,10);
         avlTree.add(15,15);
