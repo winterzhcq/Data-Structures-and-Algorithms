@@ -98,6 +98,7 @@ public class BST<E extends Comparable<E>> {
             // 方法二：删除左子树的最大节点
             Node successor = maxmum(node.left);
             successor.left = removeMax(node.left);
+			successor.right = node.right;
             node.left = node.right = null;
             return successor;
         }
